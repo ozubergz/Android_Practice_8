@@ -18,6 +18,9 @@ class AcronymViewModel @Inject constructor(
     private val acronymRepository: AcronymRepository
 ) : ViewModel() {
 
+    private val _meanings = MutableLiveData<List<Lf>>()
+    val meanings : LiveData<List<Lf>> get() = _meanings
+
     /**
      * 2 way binding to observe user input; get's data from input
      */
@@ -27,7 +30,7 @@ class AcronymViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             /* let -> executes a block that are non-null values */
             query.get()?.let {
-                acronymRepository.fetchAcronym(it)
+                _meanings.postValue(acronymRepository.fetchAcronym(it))
             }
         }
     }
