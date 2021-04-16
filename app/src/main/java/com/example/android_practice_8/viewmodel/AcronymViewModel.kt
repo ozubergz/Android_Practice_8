@@ -18,25 +18,18 @@ class AcronymViewModel @Inject constructor(
     private val acronymRepository: AcronymRepository
 ) : ViewModel() {
 
-    private val _text = MutableLiveData<String>()
-    val text : LiveData<String> get() = _text
-
     /**
-     * 2 way binding to observe user input
+     * 2 way binding to observe user input; get's data from input
      */
     val query : ObservableField<String> = ObservableField("")
 
-    fun setText() {
-        _text.value = query.get()
+    fun fetchAcronym() {
+        viewModelScope.launch(Dispatchers.IO) {
+            /* let -> executes a block that are non-null values */
+            query.get()?.let {
+                acronymRepository.fetchAcronym(it)
+            }
+        }
     }
-
-//    private val _meanings = MutableLiveData<List<Lf>>()
-//    val meanings : LiveData<List<Lf>> get() = _meanings
-//
-//    fun fetchAcronym(query : String) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            acronymRepository.fetchAcronym(query)
-//        }
-//    }
 
 }

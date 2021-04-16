@@ -18,8 +18,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupDataBinding()
+    }
+
+    private fun setupDataBinding() {
         DataBindingUtil.setContentView<ActivityMainBinding>(
-            this, R.layout.activity_main
+                this, R.layout.activity_main
         ).apply {
             lifecycleOwner = this@MainActivity
             viewModel = acronymViewModel
