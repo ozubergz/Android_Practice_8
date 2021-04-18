@@ -1,5 +1,6 @@
 package com.example.android_practice_8.viewmodel
 
+import android.util.Log
 import androidx.databinding.Observable
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
