@@ -19,12 +19,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setupDataBinding()
-
-        acronymViewModel.meanings.observe(this) {
-            acronymAdapter.loadData(it)
-        }
+        setupObservers()
     }
 
     private fun setupDataBinding() {
@@ -37,5 +33,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    private fun setupObservers(){
+        acronymViewModel.meanings.observe(this) {
+            acronymAdapter.loadData(it)
+        }
+    }
 }

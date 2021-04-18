@@ -26,9 +26,17 @@ class AcronymViewModel @Inject constructor(
      */
     val query : ObservableField<String> = ObservableField("")
 
-    fun fetchAcronym() {
+
+    /**
+     * Callback function used to listen to trigger actions
+     * Button
+     * TextInputEditText
+     */
+    val fetch : Function0<Unit> = this::fetchAcronym
+
+    private fun fetchAcronym() {
         viewModelScope.launch(Dispatchers.IO) {
-            /* let -> executes a block that are non-null values */
+            /* let -> executes a block of that are non-null values */
             query.get()?.let {
                 _meanings.postValue(acronymRepository.fetchAcronym(it))
             }

@@ -11,12 +11,9 @@ class AcronymAdapter : RecyclerView.Adapter<AcronymAdapter.AcronymViewHolder>() 
     private val dataSet = mutableListOf<Lf>()
 
     class AcronymViewHolder(private val binding: MeaningItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun loadMeaning(lf : Lf) {
-            binding.apply {
-                meaning = lf
-                // essentially this forces everything it needs to do in binding, right the moment it's called
-                executePendingBindings()
-            }
+        fun loadMeaning(lf : Lf) = with(binding) {
+            meaning = lf
+            executePendingBindings() //this makes binding to run immediately instead of delaying it
         }
     }
 
